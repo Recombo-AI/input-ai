@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InputAI</title>
+  <link rel="stylesheet" href="../lib/index.css">
+  <script type="module" src="../lib/index.ts"></script>
+</head>
+
+<body>
+  <textarea placeholder="JSONata Expression" rows="10" cols="50"></textarea>
+
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", function (event) {
+      const apiKey = 'GOOGLE_API_KEY';
+
+      new InputAI(document.querySelector('textarea'), {
+        api: {
+          url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${apiKey}`,
+          body: {
+            "system_instruction": {
+              "parts": {
+                "text": "You are a cat. Your name is Neko. {{system}}"
+              }
+            },
+            "contents": [{
+              "parts": [{
+                "text": "{{prompt}}"
+              }]
+            }],
+            "generationConfig": {
+              "maxOutputTokens": 1000,
+            }
+          },
+          responseExpression: "{{$join(candidates.content.parts.text)}}"
+        },
+        system: `
+          You are expert in generating jsonata expressions.
+
+          CRITICAL REQUIREMENTS:
+          - Prefer response as a HTML supported string, without markdown or any other formatting.
+          - Wrap jsonata expressions in <pre> tag.
+          - Wrap json objects in <pre> tag as well.
+        `
+      });
+    });
+  </script>
+</body>
+
+</html>

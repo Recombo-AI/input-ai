@@ -1,0 +1,211 @@
+:root {
+  /* Consolidated color palette */
+  --input-ai-primary: #007bff;
+  --input-ai-danger: #dc3545;
+  --input-ai-bg: #fff;
+  --input-ai-text: #333;
+  --input-ai-border: #e0e0e0;
+  --input-ai-light-bg: #f9f9f9;
+  --input-ai-dark-bg: #333333;
+  --input-ai-overlay: rgba(0,0,0,0.5);
+  --input-ai-shadow: rgba(0,0,0,0.1);
+  --input-ai-focus: rgba(124,104,238,0.2);
+  
+  /* Consolidated measurements */
+  --input-ai-btn-size: 2rem;
+  --input-ai-spacing: 1rem;
+  --input-ai-radius: 1rem;
+  --input-ai-radius-sm: 8px;
+  --input-ai-max-height: 22rem;
+  --input-ai-min-height: 10rem;
+  
+  /* Position defaults */
+  --input-ai-btn-pos-bottom: 10px;
+  --input-ai-btn-pos-right: 10px;
+  
+  /* Typography */
+  --input-ai-font: system-ui, sans-serif;
+  --input-ai-line-height: 1.6;
+}
+
+/* Base & Utility */
+.input-ai--d-none {display: none !important}
+svg {width: 1.5rem; height: 1.5rem}
+
+/* Layout components */
+.input-ai--wrapper {position: relative; width: fit-content}
+
+.input-ai--button-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  bottom: var(--input-ai-btn-pos-bottom);
+  right: var(--input-ai-btn-pos-right);
+}
+
+/* Buttons */
+.input-ai--primary-button {
+  margin: 5px 0;
+  width: var(--input-ai-btn-size);
+  height: var(--input-ai-btn-size);
+  background: var(--input-ai-primary);
+  color: var(--input-ai-bg);
+  border: none;
+  border-radius: 20%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  opacity: 0.4;
+}
+.input-ai--primary-button:hover {opacity: 1}
+
+/* Modal */
+.input-ai--modal {
+  position: fixed;
+  inset: 0;
+  background: var(--input-ai-overlay);
+  z-index: 1000;
+  font-family: var(--input-ai-font);
+}
+
+.input-ai--modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--input-ai-bg);
+  border-radius: var(--input-ai-radius);
+  padding: var(--input-ai-spacing);
+  box-shadow: 0 2px 4px var(--input-ai-shadow);
+  overflow-y: auto;
+  box-sizing: border-box;
+  max-width: 90%;
+  width: 60%;
+}
+
+.input-ai--modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--input-ai-spacing);
+}
+
+.input-ai--modal-title {
+  color: var(--input-ai-text);
+  margin: 0;
+}
+
+.input-ai--modal-close {
+  color: var(--input-ai-text);
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: none;
+  transition: background 0.3s;
+}
+.input-ai--modal-close:hover {background: var(--input-ai-shadow)}
+
+/* Input */
+.input-ai--user-input-container {position: relative}
+
+.input-ai--user-input {
+  width: 100%;
+  padding: 16px;
+  font-family: var(--input-ai-font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--input-ai-text);
+  background-color: var(--input-ai-bg);
+  border: 1px solid var(--input-ai-border);
+  border-radius: var(--input-ai-radius-sm);
+  resize: vertical;
+  box-shadow: 0 2px 4px var(--input-ai-shadow);
+  transition: box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+.input-ai--user-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--input-ai-focus);
+}
+
+.input-ai--user-input-actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: var(--input-ai-spacing);
+}
+
+.input-ai--user-input-actions button {
+  width: var(--input-ai-btn-size);
+  height: var(--input-ai-btn-size);
+  color: var(--input-ai-bg);
+  border: none;
+  border-radius: 20%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+
+.input-ai--user-input-actions button:hover {opacity: 0.8}
+.input-ai--submit-prompt {background: var(--input-ai-primary)}
+.input-ai--stop-prompt {background: var(--input-ai-danger)}
+
+/* Response */
+.input-ai--prompt-response-container {
+  line-height: var(--input-ai-line-height);
+  padding: 10px 0;
+  font-family: var(--input-ai-font);
+  max-height: var(--input-ai-max-height);
+  min-height: var(--input-ai-min-height);
+  overflow-y: auto;
+}
+
+.input-ai--pre-tag-container {
+  position: relative;
+  background: var(--input-ai-light-bg);
+  border-radius: var(--input-ai-radius);
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+  border: 1px solid var(--input-ai-border);
+  overflow: hidden;
+}
+
+.input-ai--pre-tag-actions {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  align-items: start;
+  justify-content: center;
+  gap: 5px;
+}
+.input-ai--pre-tag-actions button {
+  width: var(--input-ai-btn-size);
+  height: var(--input-ai-btn-size);
+  background: var(--input-ai-bg);
+  font-family: var(--input-ai-font);
+  border: 1px solid var(--input-ai-border);
+  border-radius: 20%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+.input-ai--pre-tag-actions button:hover {opacity: 0.8}
+.input-ai--pre-tag-container:hover .input-ai--pre-tag-actions {display: flex}
+
+.input-ai--prompt-response-error {color: var(--input-ai-danger)}

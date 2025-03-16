@@ -1,0 +1,20 @@
+{
+  "name": "input-ai",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "build": "bun run ./build.ts",
+    "dev-server": "bun run examples/server.ts",
+    "preview": "bun examples/default.html"
+  },
+  "dependencies": {
+    "jsonata": "^2.0.6"
+  }
+}
