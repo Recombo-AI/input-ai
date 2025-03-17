@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Drafting Tool</title>
+
+  <link rel="stylesheet" href="./index.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script type="module" src="../../lib/index.ts"></script>
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", function (event) {
+      /*
+        This example is just for demonstration purposes.
+        DO NOT CALL LLM vendors directly from the client-side code.
+        Instead, use a server-side proxy to handle API requests securely as well as validating and sanitizing LLM instructions.
+      */
+      const apiKey = 'GOOGLE_API_KEY';
+
+      configureInputAI({
+        api: {
+          url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${apiKey}`,
+          body: {
+            "system_instruction": {
+              "parts": {
+                "text": "You are a cat. Your name is Neko. {{systemInstructions}}"
+              }
+            },
+            "contents": "{{messages}}",
+            "generationConfig": {
+              "maxOutputTokens": 1000,
+            }
+          },
+          responseExpression: "{{$join(candidates.content.parts.text)}}"
+        },
+        userMessage: { role: "user", parts: [{ text: "{{user}}" }] },
+        assistantMessage: { role: "model", parts: [{ text: "{{assistant}}" }] }
+      });
+    });
+  </script>
+</head>
+
+<body class="bg-gray-900 p-6">
+  <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg p-6">
+    <h1 class="text-2xl font-bold text-gray-100 mb-6">Email Drafting Tool</h1>
+
+    <form class="space-y-4">
+      <!-- Subject -->
+      <div>
+        <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject:</label>
+        <input type="text" name="subject" placeholder="Enter email subject" autocomplete="off"
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          data-input-ai-modal-title="Subject generator"
+          data-input-ai-prompt-placeholder="Ask AI to generate a subject..."
+          data-input-ai-system-instructions="You are a cat and an expert in drafting professional email subjects. Generate and return the subject wrapped in <pre> tag from given points." />
+      </div>
+
+      <!-- Email Type -->
+      <div>
+        <label for="emailType" class="block text-sm font-medium text-gray-300 mb-1">Email Type:</label>
+        <select name="emailType"
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Select type</option>
+          <option value="internal">Internal Communication</option>
+          <option value="client">Client Communication</option>
+          <option value="proposal">Project Proposal</option>
+          <option value="follow-up" selected>Follow-up</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <!-- Priority Level -->
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-1">Priority:</label>
+        <div class="flex space-x-4">
+          <div class="flex items-center">
+            <input type="radio" id="low" name="priority" value="low" class="h-4 w-4 text-blue-500">
+            <label for="low" class="ml-2 text-sm text-gray-300">Low</label>
+          </div>
+          <div class="flex items-center">
+            <input type="radio" id="medium" name="priority" value="medium" class="h-4 w-4 text-blue-500">
+            <label for="medium" class="ml-2 text-sm text-gray-300">Medium</label>
+          </div>
+          <div class="flex items-center">
+            <input type="radio" id="high" name="priority" value="high" class="h-4 w-4 text-blue-500" checked>
+            <label for="high" class="ml-2 text-sm text-gray-300">High</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Content -->
+      <div>
+        <label for="content" class="block text-sm font-medium text-gray-300 mb-1">Email Content:</label>
+        <textarea id="content" name="content" rows="10" placeholder="Type your email content here..."
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          data-input-ai-modal-title="Email content generator"
+          data-input-ai-prompt-placeholder="Ask AI to generate email content"
+          data-input-ai-system-instructions="You are expert in drafting emails.Draft an email body only in <pre> tag based on subject, email type, priority. <subject>{{subject.value}}</subject><emailType>{{emailType.value}}</emailType><priority>{{priority.value}}</priority>"></textarea>
+      </div>
+
+      <!-- Attachments -->
+      <div>
+        <label for="attachments" class="block text-sm font-medium text-gray-300 mb-1">Attachments:</label>
+        <input type="file" id="attachments" name="attachments" multiple
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-gray-600 file:text-gray-300 hover:file:bg-gray-500">
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex space-x-4 pt-4">
+        <button type="submit"
+          class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Send Email
+        </button>
+        <button type="button"
+          class="px-4 py-2 bg-gray-600 text-gray-200 rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">
+          Save Draft
+        </button>
+        <button type="reset"
+          class="px-4 py-2 border border-gray-600 text-gray-300 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400">
+          Clear Form
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

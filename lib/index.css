@@ -1,211 +1,408 @@
 :root {
-  /* Consolidated color palette */
-  --input-ai-primary: #007bff;
-  --input-ai-danger: #dc3545;
-  --input-ai-bg: #fff;
-  --input-ai-text: #333;
-  --input-ai-border: #e0e0e0;
-  --input-ai-light-bg: #f9f9f9;
-  --input-ai-dark-bg: #333333;
-  --input-ai-overlay: rgba(0,0,0,0.5);
-  --input-ai-shadow: rgba(0,0,0,0.1);
-  --input-ai-focus: rgba(124,104,238,0.2);
-  
-  /* Consolidated measurements */
-  --input-ai-btn-size: 2rem;
-  --input-ai-spacing: 1rem;
-  --input-ai-radius: 1rem;
-  --input-ai-radius-sm: 8px;
-  --input-ai-max-height: 22rem;
-  --input-ai-min-height: 10rem;
-  
-  /* Position defaults */
-  --input-ai-btn-pos-bottom: 10px;
-  --input-ai-btn-pos-right: 10px;
-  
-  /* Typography */
-  --input-ai-font: system-ui, sans-serif;
-  --input-ai-line-height: 1.6;
+	/* Modal variables */
+	--input-ai--modal-bg: rgba(0, 0, 0, 0.5);
+	--input-ai--modal-z-index: 1000;
+	--input-ai--modal-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		sans-serif;
+
+	/* Modal content variables */
+	--input-ai--modal-content-bg: #fff;
+	--input-ai--modal-content-border-radius: 12px;
+	--input-ai--modal-content-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+	--input-ai--modal-content-width: 100%;
+	--input-ai--modal-content-height: 100%;
+	--input-ai--modal-content-max-width: 800px;
+
+	/* Header variables */
+	--input-ai--modal-header-padding: 12px;
+	--input-ai--modal-header-border: 1px solid #e0e0e0;
+
+	/* Title variables */
+	--input-ai--modal-title-font-size: 18px;
+	--input-ai--modal-title-font-weight: 600;
+	--input-ai--modal-title-color: #333333;
+
+	/* Close button variables */
+	--input-ai--modal-close-hover-bg: #f5f5f5;
+	--input-ai--modal-close-icon-size: 20px;
+	--input-ai--modal-close-icon-color: #666;
+
+	/* User input container variables */
+	--input-ai--user-input-form-padding: 8px 20px;
+	--input-ai--user-input-form-border-top: 1px solid #e0e0e0;
+
+	/* Textarea variables */
+	--input-ai--user-input-padding: 12px 16px;
+	--input-ai--user-input-font-size: 16px;
+	--input-ai--user-input-line-height: 1.5;
+	--input-ai--user-input-border: 1px solid #e0e0e0;
+	--input-ai--user-input-form-border-hover-color: #007bff;
+	--input-ai--user-input-focus-shadow: 0 0 0 2px rgba(124, 124, 255, 0.1);
+	--input-ai--user-input-bg: #fff;
+	--input-ai--user-input-color: #333;
+	--input-ai--user-input-placeholder-color: #999;
+
+	/* Action buttons variables */
+	--input-ai--primary-button-bottom: 8px;
+	--input-ai--primary-button-right: 22px;
+	--input-ai--primary-button-margin: 0.2rem 0.8rem;
+	--input-ai--primary-button-width: 1.5rem;
+	--input-ai--primary-button-height: 1.5rem;
+	--input-ai--primary-button-bg: #007bff;
+	--input-ai--primary-button-color: white;
+	--input-ai--primary-button-border-radius: 20%;
+	--input-ai--primary-button-icon-size: 1rem;
+	--input-ai--user-input-actions-bottom: 25px;
+	--input-ai--user-input-actions-right: 32px;
+	--input-ai--user-input-actions-gap: 8px;
+	--input-ai--action-button-bg: #007bff;
+	--input-ai--action-button-color: white;
+	--input-ai--action-button-width: 1.8rem;
+	--input-ai--action-button-height: 1.8rem;
+	--input-ai--action-button-icon-size: 1.2rem;
+	--input-ai--action-button-border-radius: 25%;
+	--input-ai--stop-prompt-button-bg: rgba(255, 0, 0, 0.8);
+
+	/* Response container variables */
+	--input-ai--prompt-bg: #8fd7ff;
+	--input-ai--prompt-color: #333333;
+	--input-ai--assistant-bg: white;
+	--input-ai--assistant-color: #333;
+	--input-ai--response-container-padding: 0 16px;
+	--input-ai--response-container-max-height: 350px;
+	--input-ai--response-container-font-size: 15px;
+	--input-ai--response-container-line-height: 1.6;
+	--input-ai--response-container-bg: white;
+	--input-ai--response-container-color: #333;
+	--input-ai--response-container-scrollbar-color: #ccc;
+	--input-ai--assistant-error-color: #e53935;
+	--input-ai--assistant-error-font-size: 14px;
+
+	/* Pre tag container variables */
+	--input-ai--pre-tag-container-bg: #f5f5f5;
+	--input-ai--pre-tag-container-color: #333;
+	--input-ai--pre-tag-container-border: 1px solid #e0e0e0;
+	--input-ai--pre-tag-container-border-radius: 8px;
+	--input-ai--pre-tag-container-padding: 16px;
+	--input-ai--pre-tag-container-margin: 8px 0;
+
+	/* Pre tag variables */
+	--input-ai--pre-tag-white-space: pre-wrap;
+	--input-ai--pre-tag-line-height: 1.4;
+	--input-ai--pre-tag-color: #333;
+	--input-ai--pre-tag-font-family: monospace;
+
+	/* Pre tag action buttons */
+	--input-ai--pre-tag-actions-top: 8px;
+	--input-ai--pre-tag-actions-right: 8px;
+	--input-ai--pre-tag-actions-gap: 8px;
+	--input-ai--pre-tag-action-button-size: 28px;
+	--input-ai--accept-action-button-bg: #007bff;
+	--input-ai--copy-action-button-bg: rgba(60, 60, 60, 1);
+	--input-ai--pre-tag-action-button-color: white;
+	--input-ai--pre-tag-action-button-icon-size: 14px;
+	--input-ai--pre-tag-action-button-border-radius: 4px;
 }
 
-/* Base & Utility */
-.input-ai--d-none {display: none !important}
-svg {width: 1.5rem; height: 1.5rem}
-
-/* Layout components */
-.input-ai--wrapper {position: relative; width: fit-content}
-
-.input-ai--button-wrapper {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  bottom: var(--input-ai-btn-pos-bottom);
-  right: var(--input-ai-btn-pos-right);
+/* Base styles */
+.input-ai--wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
 }
 
-/* Buttons */
+.input-ai--wrapper svg {
+	width: var(--input-ai--primary-button-icon-size);
+	height: var(--input-ai--primary-button-icon-size);
+}
+
 .input-ai--primary-button {
-  margin: 5px 0;
-  width: var(--input-ai-btn-size);
-  height: var(--input-ai-btn-size);
-  background: var(--input-ai-primary);
-  color: var(--input-ai-bg);
-  border: none;
-  border-radius: 20%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s;
-  opacity: 0.4;
+	position: absolute;
+	right: var(--input-ai--primary-button-right);
+	width: var(--input-ai--primary-button-width);
+	height: var(--input-ai--primary-button-height);
+	background: var(--input-ai--primary-button-bg);
+	color: var(--input-ai--primary-button-color);
+	border: none;
+	border-radius: var(--input-ai--primary-button-border-radius);
+	cursor: pointer;
+	padding: inherit;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.3s;
+	opacity: 0.4;
+	transform: scale(1.2);
+	transition: transform 0.3s;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.input-ai--primary-button:hover {opacity: 1}
 
-/* Modal */
+.input-ai--wrapper textarea ~ .input-ai--primary-button {
+	bottom: var(--input-ai--primary-button-bottom);
+}
+
+.input-ai--primary-button:hover {
+	opacity: 1;
+	transform: scale(1.3);
+	background: var(--input-ai--primary-button-bg);
+}
+
 .input-ai--modal {
-  position: fixed;
-  inset: 0;
-  background: var(--input-ai-overlay);
-  z-index: 1000;
-  font-family: var(--input-ai-font);
+	all: revert;
+	background-color: var(--input-ai--modal-bg);
+	position: fixed;
+	width: 100%;
+	height: 100%;
 }
 
 .input-ai--modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--input-ai-bg);
-  border-radius: var(--input-ai-radius);
-  padding: var(--input-ai-spacing);
-  box-shadow: 0 2px 4px var(--input-ai-shadow);
-  overflow-y: auto;
-  box-sizing: border-box;
-  max-width: 90%;
-  width: 60%;
+	place-self: center;
+	margin: auto;
+	background-color: var(--input-ai--modal-content-bg);
+	border-radius: var(--input-ai--modal-content-border-radius);
+	box-shadow: var(--input-ai--modal-content-shadow);
+	width: var(--input-ai--modal-content-width);
+	height: var(--input-ai--modal-content-height);
+	max-width: var(--input-ai--modal-content-max-width);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
+/* Header styles */
 .input-ai--modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: var(--input-ai-spacing);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--input-ai--modal-header-padding);
+	border-bottom: var(--input-ai--modal-header-border);
 }
 
 .input-ai--modal-title {
-  color: var(--input-ai-text);
-  margin: 0;
+	margin: 0;
+	font-size: var(--input-ai--modal-title-font-size);
+	font-weight: var(--input-ai--modal-title-font-weight);
+	color: var(--input-ai--modal-title-color);
 }
 
 .input-ai--modal-close {
-  color: var(--input-ai-text);
-  cursor: pointer;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  background: none;
-  transition: background 0.3s;
+	width: fit-content;
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s;
 }
-.input-ai--modal-close:hover {background: var(--input-ai-shadow)}
 
-/* Input */
-.input-ai--user-input-container {position: relative}
+.input-ai--modal-close:hover {
+	background-color: var(--input-ai--modal-close-hover-bg);
+}
+
+.input-ai--modal-close svg {
+	width: var(--input-ai--modal-close-icon-size);
+	height: var(--input-ai--modal-close-icon-size);
+	color: var(--input-ai--modal-close-icon-color);
+}
+
+/* User input container */
+.input-ai--user-input-form {
+	display: flex;
+	justify-content: normal;
+	align-items: normal;
+	flex-direction: row;
+	padding: var(--input-ai--user-input-form-padding);
+	border-top: var(--input-ai--user-input-form-border-top);
+}
+
+.input-ai--user-input-form:hover {
+	border-color: var(--input-ai--user-input-form-border-hover-color);
+}
 
 .input-ai--user-input {
-  width: 100%;
-  padding: 16px;
-  font-family: var(--input-ai-font);
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--input-ai-text);
-  background-color: var(--input-ai-bg);
-  border: 1px solid var(--input-ai-border);
-  border-radius: var(--input-ai-radius-sm);
-  resize: vertical;
-  box-shadow: 0 2px 4px var(--input-ai-shadow);
-  transition: box-shadow 0.2s ease;
-  box-sizing: border-box;
-}
-.input-ai--user-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--input-ai-focus);
+	width: 100%;
+	height: 100%;
+	font-size: var(--input-ai--user-input-font-size);
+	line-height: var(--input-ai--user-input-line-height);
+	border: none;
+	outline: none;
+	resize: none;
+	font-family: inherit;
+	background-color: var(--input-ai--user-input-bg);
+	color: var(--input-ai--user-input-color);
 }
 
 .input-ai--user-input-actions {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: var(--input-ai-spacing);
+	display: flex;
+	gap: var(--input-ai--user-input-actions-gap);
+	place-self: end;
 }
 
 .input-ai--user-input-actions button {
-  width: var(--input-ai-btn-size);
-  height: var(--input-ai-btn-size);
-  color: var(--input-ai-bg);
-  border: none;
-  border-radius: 20%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s;
-  opacity: 1;
+	background-color: var(--input-ai--action-button-bg);
+	color: var(--input-ai--action-button-color);
+	border: none;
+	padding: 0;
+	margin: 0;
+	border-radius: var(--input-ai--action-button-border-radius);
+	width: var(--input-ai--action-button-width);
+	height: var(--input-ai--action-button-height);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.2s;
 }
 
-.input-ai--user-input-actions button:hover {opacity: 0.8}
-.input-ai--submit-prompt {background: var(--input-ai-primary)}
-.input-ai--stop-prompt {background: var(--input-ai-danger)}
+.input-ai--user-input-actions button.input-ai--stop-prompt {
+	background-color: var(--input-ai--stop-prompt-button-bg);
+}
 
-/* Response */
+.input-ai--user-input-actions button:hover {
+	opacity: 0.8;
+}
+
+.input-ai--user-input-actions svg {
+	width: var(--input-ai--action-button-icon-size);
+	height: var(--input-ai--action-button-icon-size);
+}
+
 .input-ai--prompt-response-container {
-  line-height: var(--input-ai-line-height);
-  padding: 10px 0;
-  font-family: var(--input-ai-font);
-  max-height: var(--input-ai-max-height);
-  min-height: var(--input-ai-min-height);
-  overflow-y: auto;
+	padding: var(--input-ai--response-container-padding);
+	overflow-y: auto;
+	flex-grow: 1;
+	height: var(--input-ai--response-container-max-height);
+	font-size: var(--input-ai--response-container-font-size);
+	line-height: var(--input-ai--response-container-line-height);
+	background-color: var(--input-ai--response-container-bg);
+	color: var(--input-ai--response-container-color);
+	scrollbar-color: var(--input-ai--response-container-scrollbar-color);
 }
 
+.input-ai--prompt {
+	place-self: end;
+	border-radius: 8px;
+	background-color: var(--input-ai--prompt-bg);
+	color: var(--input-ai--prompt-color);
+	padding: 0.8rem;
+	margin: 1rem 0;
+	scroll-margin-top: 1rem;
+	width: fit-content;
+}
+
+.input-ai--assistant {
+	background-color: var(--input-ai--assistant-bg);
+	color: var(--input-ai--assistant-color);
+	margin: 1rem 0;
+	min-height: 3rem;
+}
+
+.input-ai--assistant-error {
+	color: var(--input-ai--assistant-error-color);
+	font-size: var(--input-ai--assistant-error-font-size);
+	margin-top: 8px;
+}
+
+/* Pre tag container styles */
 .input-ai--pre-tag-container {
-  position: relative;
-  background: var(--input-ai-light-bg);
-  border-radius: var(--input-ai-radius);
-  padding: 10px;
-  margin: 10px 10px 10px 0;
-  border: 1px solid var(--input-ai-border);
-  overflow: hidden;
+	position: relative;
+	background-color: var(--input-ai--pre-tag-container-bg);
+	color: var(--input-ai--pre-tag-container-color);
+	border: var(--input-ai--pre-tag-container-border);
+	border-radius: var(--input-ai--pre-tag-container-border-radius);
+	padding: var(--input-ai--pre-tag-container-padding);
+	margin: var(--input-ai--pre-tag-container-margin);
 }
 
+.input-ai--pre-tag-container pre {
+	margin: 0;
+	overflow: auto;
+	white-space: var(--input-ai--pre-tag-white-space);
+	line-height: var(--input-ai--pre-tag-line-height);
+	color: var(--input-ai--pre-tag-color);
+	font-family: var(--input-ai--pre-tag-font-family);
+}
+
+/* Pre tag action buttons - hidden by default */
 .input-ai--pre-tag-actions {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-  align-items: start;
-  justify-content: center;
-  gap: 5px;
+	position: absolute;
+	top: var(--input-ai--pre-tag-actions-top);
+	right: var(--input-ai--pre-tag-actions-right);
+	display: flex;
+	gap: var(--input-ai--pre-tag-actions-gap);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, visibility 0.2s ease;
 }
-.input-ai--pre-tag-actions button {
-  width: var(--input-ai-btn-size);
-  height: var(--input-ai-btn-size);
-  background: var(--input-ai-bg);
-  font-family: var(--input-ai-font);
-  border: 1px solid var(--input-ai-border);
-  border-radius: 20%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s;
-  opacity: 1;
-}
-.input-ai--pre-tag-actions button:hover {opacity: 0.8}
-.input-ai--pre-tag-container:hover .input-ai--pre-tag-actions {display: flex}
 
-.input-ai--prompt-response-error {color: var(--input-ai-danger)}
+/* Show buttons on container hover */
+.input-ai--pre-tag-container:hover .input-ai--pre-tag-actions {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Style for both accept and copy buttons */
+.input-ai--pre-tag-actions button {
+	color: var(--input-ai--pre-tag-action-button-color);
+	border: none;
+	border-radius: var(--input-ai--pre-tag-action-button-border-radius);
+	width: var(--input-ai--pre-tag-action-button-size);
+	height: var(--input-ai--pre-tag-action-button-size);
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.1s;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.input-ai--pre-tag-actions button svg {
+	width: var(--input-ai--pre-tag-action-button-icon-size);
+	height: var(--input-ai--pre-tag-action-button-icon-size);
+}
+
+/* Specific styles for accept button */
+.input-ai--pre-tag-actions button.input-ai--accept-pre {
+	background-color: var(--input-ai--accept-action-button-bg);
+}
+
+/* Specific styles for copy button */
+.input-ai--pre-tag-actions button.input-ai--copy-pre {
+	background-color: var(--input-ai--copy-action-button-bg);
+}
+
+/* Utility class */
+.input-ai--d-none {
+	display: none !important;
+}
+
+/* Adding responsive adjustments */
+@media (max-width: 768px) {
+	.input-ai--modal-content {
+		max-height: 90vh;
+		width: 90%;
+	}
+
+	.input-ai--user-input-actions {
+		right: 28px;
+	}
+
+	.input-ai--pre-tag-actions {
+		top: 4px;
+		right: 4px;
+	}
+}

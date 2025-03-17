@@ -6,7 +6,7 @@ const server = Bun.serve({
 		const corsHeaders = {
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-			"Access-Control-Allow-Headers": "Content-Type",
+			"Access-Control-Allow-Headers": "Content-Type, X-CSRF-Token",
 		};
 
 		// Handle CORS preflight requests
@@ -21,22 +21,25 @@ const server = Bun.serve({
 			const data = await req.json();
 			console.log("Received JSON:", data);
 
-			if (data.prompt === "") {
-				return new Response("Prompt cannot be empty", {
-					status: 422,
-					headers: {
-						...corsHeaders,
-						"Content-Type": "application/json",
-					},
-				});
-			}
+			const text = await Bun.file("./examples/default/stream.txt").text();
 
-			const stream = Bun.file("./examples/stream.txt").stream();
+			const stream = new ReadableStream({
+				async start(controller) {
+					const lines = text.split("\n");
+					for (const line of lines) {
+						await new Promise((resolve) => setTimeout(resolve, 100));
+						controller.enqueue(line);
+					}
+
+					controller.close();
+				},
+			});
+
 			return new Response(stream, {
 				headers: {
 					...corsHeaders,
-					"Content-Type": "text/plain",
-					"Transfer-Encoding": "chunked",
+					"Content-Type": "text/event-stream",
+					"Cache-Control": "no-cache",
 				},
 			});
 		}

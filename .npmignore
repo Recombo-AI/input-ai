@@ -1,0 +1,12 @@
+node_modules/
+examples/
+.github/
+.vscode/
+*.json
+!package.json
+*.log
+*.ts
+!*.d.ts
+*.css
+*.map
+.env

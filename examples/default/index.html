@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Product Rating Form</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Start server using `bun run dev-server` on localhost:3001 first -->
+  <meta name="input-ai-url" content="http://localhost:3001/stream">
+  <meta name="input-ai-headers" content='{"X-CSRF-Token": "{{csrfmiddlewaretoken.value}}"}'>
+  <meta name="input-ai-body"
+    content='{"systemInstructions": "{{systemInstructions}}", "messages": "{{messages}}", "max_tokens": 100}'>
+
+  <script src="../../lib/index.ts"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #34495e;
+      font-family: Arial, sans-serif;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Product Rating Form</h1>
+
+  <form>
+    <input type="hidden" name="csrfmiddlewaretoken" value="123456789abcdef">
+
+    <div class="product-card">
+      <div class="product-title">Wireless Bluetooth Headphones</div>
+
+      <label>
+        Category:
+        <select name="category">
+          <option value="">Select Category</option>
+          <option value="electronics">Electronics</option>
+          <option value="audio">Audio</option>
+          <option value="accessories">Accessories</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label>
+        Your Review:
+        <textarea name="review1" placeholder="Add your review here..." data-input-ai-modal-title="AI Writer"
+          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"
+          data-input-ai-prompt-placeholder="Ask AI to format your review"
+          data-input-ai-system-instructions="You are a product review expert. User has chosen product category as {{category.value}}. Provide very consise and short review of the product based on these points and wrap it in <pre> tag: <points>{{review1.value}}</points>"></textarea>
+      </label>
+    </div>
+
+    <div class="product-card">
+      <div class="product-title">Smart Coffee Maker</div>
+
+      <label>
+        Usage Frequency:
+        <select name="usage">
+          <option value="">Select Usage</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="rarely">Rarely</option>
+        </select>
+      </label>
+
+      <label>
+        Your Review:
+        <textarea name="review2" placeholder="Add your review here..." data-input-ai-modal-title="AI Writer"
+          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"
+          data-input-ai-system-instructions="You are a product review expert. User has chosen product usage frequency as {{usage.value}}. Provide very consise and short review of the product based on given points by user."
+          data-input-ai-prompt-placeholder="Ask AI to format your review"></textarea>
+      </label>
+    </div>
+
+    <div class="product-card">
+      <div class="product-title">Fitness Tracker Watch</div>
+
+      <label>
+        Purchase Reason:
+        <select name="reason">
+          <option value="">Select Reason</option>
+          <option value="fitness">Fitness Tracking</option>
+          <option value="health">Health Monitoring</option>
+          <option value="gift">Gift</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <label>
+        Your Review:
+        <textarea name="review3" placeholder="Add your review here..." data-input-ai-modal-title="AI Writer"
+          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"
+          data-input-ai-system-instructions="You are a review expert. User has chosen product purchase reason as {{reason.value}}. Provide very consise and short review of the product based on given points by user."
+          data-input-ai-prompt-placeholder="Ask AI to format your review"></textarea>
+      </label>
+    </div>
+
+    <button type="submit">Submit Ratings</button>
+  </form>
+</body>
+
+</html>

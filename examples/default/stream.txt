@@ -1,0 +1,10 @@
+data: {"candidates": [{"content": {"parts": [{"text": "```"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 156,"totalTokenCount": 156,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 156}]},"modelVersion": "gemini-2.0-flash"}
+
+data: {"candidates": [{"content": {"parts": [{"text": "html\n\u003c"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 156,"totalTokenCount": 156,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 156}]},"modelVersion": "gemini-2.0-flash"}
+
+data: {"candidates": [{"content": {"parts": [{"text": "pre\u003e\n\u003cb\u003ePros:\u003c/b\u003e Excellent sound quality, packed with features, and"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 156,"totalTokenCount": 156,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 156}]},"modelVersion": "gemini-2.0-flash"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " boasts a good battery life.\n\u003cb\u003eCons:\u003c/b\u003e Noise cancellation is underwhelming, and the fit"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 156,"totalTokenCount": 156,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 156}]},"modelVersion": "gemini-2.0-flash"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " might not be ideal for all head sizes.\n\u003c/pre\u003e\n```"}],"role": "model"},"finishReason": "STOP"}],"usageMetadata": {"promptTokenCount": 152,"candidatesTokenCount": 54,"totalTokenCount": 206,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 152}],"candidatesTokensDetails": [{"modality": "TEXT","tokenCount": 54}]},"modelVersion": "gemini-2.0-flash"}
+

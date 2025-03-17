@@ -1,20 +1,63 @@
 {
   "name": "input-ai",
-  "module": "index.ts",
+  "description": "Simple, framework-agnostic, HTML first JavaScript library for adding AI-powered text generation to input fields.",
+  "version": "0.0.2",
+  "author": "Recombo AI <https://recombo.ai/>",
   "type": "module",
+  "module": "dist/inputai.min.js",
+  "main": "dist/inputai.min.js",
+  "browser": "dist/inputai.min.js",
+  "unpkg": "dist/inputai.min.js",
+  "jsdelivr": "dist/inputai.min.js",
+  "style": "dist/inputai.min.css",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "contributors": [
+    "Yogesh Khater <yogesh.khater@recombo.ai>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Recombo-AI/input-ai.git"
+  },
+  "files": [
+    "dist/inputai.min.js",
+    "dist/inputai.min.css",
+    "dist/index.d.ts",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/inputai.min.js",
+      "require": "./dist/inputai.min.js"
+    },
+    "./style": "./dist/inputai.min.css"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@happy-dom/global-registrator": "^17.4.4",
     "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "scripts": {
-    "build": "bun run ./build.ts",
-    "dev-server": "bun run examples/server.ts",
-    "preview": "bun examples/default.html"
   },
   "dependencies": {
     "jsonata": "^2.0.6"
+  },
+  "scripts": {
+    "lint": "bunx biome check --write ./lib",
+    "build": "bun run ./build.ts",
+    "dev-server": "bun run examples/default/server.ts",
+    "default": "bun examples/default/index.html",
+    "gemini": "bun examples/gemini/index.html"
+  },
+  "keywords": [
+    "input",
+    "ai",
+    "llms",
+    "javascript"
+  ],
+  "homepage": "https://github.com/Recombo-AI/input-ai",
+  "bugs": {
+    "url": "https://github.com/Recombo-AI/input-ai/issues"
   }
 }
