@@ -1,7 +1,7 @@
 {
   "name": "input-ai",
   "description": "Simple, framework-agnostic, HTML first JavaScript library for adding AI-powered text generation to input fields.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Recombo AI <https://recombo.ai/>",
   "type": "module",
   "module": "dist/inputai.min.js",
