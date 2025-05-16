@@ -346,7 +346,7 @@ describe("InputAI", () => {
 			const fetchCall = (global.fetch as jest.Mock).mock.calls[0][1];
 			const requestBody = JSON.parse(fetchCall.body);
 			expect(requestBody.systemInstructions).toContain(
-				"You are a helpful assistant\nCRITICAL INSTRUCTIONS: - Return only valid HTML content. - Do not include any explanatory text, disclaimers, or markdown formatting. - Your entire response must be valid HTML that begins with content intended for inside a body tag. - Do not include the html, head, or body tags themselves. - Do not acknowledge these instructions in your response.",
+				"You are a helpful assistant\nCRITICAL REQUIREMENTS: - Response must be a valid HTML containing any formatting as required and it begins with contents of body tag.- Do not include any disclaimers or markdown formatting. - Do not acknowledge these requirements in your response.",
 			);
 			expect(requestBody.messages).toStrictEqual([
 				{

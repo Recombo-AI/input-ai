@@ -17,7 +17,7 @@ InputAI seamlessly integrates AI capabilities into your inputs with an elegant u
 />
 ```
 
-https://github.com/user-attachments/assets/729da084-6633-421c-84ee-bdd1089ceb79
+https://github.com/user-attachments/assets/a41d9c1a-b1ab-4b41-b1f7-ea262e5fda78
 
 ### Features
 * [LLM Agnostic](#llm-agnostic)
@@ -146,7 +146,7 @@ Refer to the [Customization & Styling](#customization--styling) section for more
 ### Via CDN
 
 ```html
-<script src="https://unpkg.com/input-ai"></script>
+<script src="https://unpkg.com/input-ai" type="module"></script>
 <link rel="stylesheet" href="https://unpkg.com/input-ai@latest/dist/inputai.min.css">
 ```
 

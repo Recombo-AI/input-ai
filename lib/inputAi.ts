@@ -146,17 +146,15 @@ class InputAI {
 	}
 
 	defaultSystemInstructionsForHTML() {
-		if (this.inputElement.dataset.inputAiSystemInstructionsForHTML) {
-			return this.inputElement.dataset.inputAiSystemInstructionsForHTML;
+		if (this.inputElement.dataset.inputAiSystemInstructionsForHtml) {
+			return this.inputElement.dataset.inputAiSystemInstructionsForHtml;
 		}
 
 		return (
-			"CRITICAL INSTRUCTIONS: " +
-			"- Return only valid HTML content. " +
-			"- Do not include any explanatory text, disclaimers, or markdown formatting. " +
-			"- Your entire response must be valid HTML that begins with content intended for inside a body tag. " +
-			"- Do not include the html, head, or body tags themselves. " +
-			"- Do not acknowledge these instructions in your response."
+			"CRITICAL REQUIREMENTS: " +
+			"- Response must be a valid HTML containing any formatting as required and it begins with contents of body tag." +
+			"- Do not include any disclaimers or markdown formatting. " +
+			"- Do not acknowledge these requirements in your response."
 		);
 	}
 
