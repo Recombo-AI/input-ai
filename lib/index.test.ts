@@ -663,6 +663,31 @@ describe("InputAI", () => {
 			expect(assistantMessage.innerHTML).toContain("<p>Hello World</p><p>Neko out</p>");
 		});
 
+		test("should handle error when responseExpression is not valid", async () => {
+			mockResponse([
+				'data: { "candidate": { "text": "<p>Hello World</p>" } }',
+				'data: { "candidate": { "text": "<p>Neko out</p>" } }',
+			]);
+
+			inputAi.options.api.responseExpression = "{{$join()}}";
+
+			const aiButton = document.querySelector(".input-ai--primary-button") as HTMLButtonElement;
+			aiButton.click();
+
+			const promptInput = document.querySelector(".input-ai--user-input") as HTMLTextAreaElement;
+			promptInput.value = "test prompt";
+
+			const submitButton = document.querySelector(".input-ai--submit-prompt") as HTMLButtonElement;
+			submitButton.click();
+
+			await new Promise((resolve) => setTimeout(resolve, inputAi.options.api.debounceTime));
+
+			const assistantMessage = document.querySelector(".input-ai--assistant:last-child") as HTMLDivElement;
+			expect(assistantMessage.innerHTML).toContain(
+				'- Unable to parse the chunk with given responseExpression: Argument 1 of function "join" does not match function signature',
+			);
+		});
+
 		test("should replace any form context variables with form data in prompt", async () => {
 			inputAi.options.api = {
 				url: "https://api.example.com/stream",
@@ -739,6 +764,32 @@ describe("InputAI", () => {
 			expect(assistantElement.innerHTML).toContain("<p>Hello World</p><p>Neko out</p>");
 		});
 
+		test("should handle SSE response with multiple events", async () => {
+			mockResponse([
+				`event: completion
+				data: {"type": "completion", "completion": "<p>Hello</p>", "stop_reason": null, "model": "claude-2.0"}
+
+				event: completion
+				data: {"type": "completion", "completion": "<p>World</p>", "stop_reason": null, "model": "claude-2.0"}`,
+			]);
+
+			inputAi.options.api.responseExpression = "{{$join(completion)}}";
+
+			const aiButton = document.querySelector(".input-ai--primary-button") as HTMLButtonElement;
+			aiButton.click();
+
+			const promptInput = document.querySelector(".input-ai--user-input") as HTMLTextAreaElement;
+			promptInput.value = "test prompt";
+
+			const submitButton = document.querySelector(".input-ai--submit-prompt") as HTMLButtonElement;
+			submitButton.click();
+
+			await new Promise((resolve) => setTimeout(resolve, inputAi.options.api.debounceTime));
+
+			const assistantElement = document.querySelector(".input-ai--assistant:last-child") as HTMLDivElement;
+			expect(assistantElement.innerHTML).toContain("<p>Hello</p><p>World</p>");
+		});
+
 		test("should handle SSE errors gracefully", async () => {
 			mockResponse([
 				'event: completion\ndata: {"type": "completion", "completion": "<p>Hello</p>", "stop_reason": null, "model": "claude-2.0"}',
@@ -764,6 +815,33 @@ describe("InputAI", () => {
 			expect(assistantElement?.textContent).toEqual("Hello- Rate limit exceeded");
 		});
 
+		test("should handle invalid error expression gracefully", async () => {
+			mockResponse([
+				'event: completion\ndata: {"type": "completion", "completion": "<p>Hello</p>", "stop_reason": null, "model": "claude-2.0"}',
+				'event: error\ndata: {"type": "overloaded_error", "message": "Rate limit exceeded"}',
+			]);
+
+			inputAi.options.api.responseExpression = "{{$join(completion)}}";
+			inputAi.options.api.errorExpression = "{{$join()}}";
+
+			const aiButton = document.querySelector(".input-ai--primary-button") as HTMLButtonElement;
+			aiButton.click();
+
+			const promptInput = document.querySelector(".input-ai--user-input") as HTMLTextAreaElement;
+			promptInput.value = "test prompt";
+
+			const submitButton = document.querySelector(".input-ai--submit-prompt") as HTMLButtonElement;
+			submitButton.click();
+
+			await new Promise((resolve) => setTimeout(resolve, inputAi.options.api.debounceTime));
+
+			const assistantElement = document.querySelector(".input-ai--assistant:last-child") as HTMLDivElement;
+			expect(assistantElement?.classList.contains("input-ai--assistant-error")).toBeTruthy();
+			expect(assistantElement?.textContent).toEqual(
+				'Hello- Unable to parse the chunk with given errorExpression: Argument 1 of function "join" does not match function signature',
+			);
+		});
+
 		test("should handle API errors gracefully", async () => {
 			(global.fetch as jest.Mock).mockResolvedValueOnce({
 				ok: false,
@@ -786,6 +864,28 @@ describe("InputAI", () => {
 			const assistantElement = document.querySelector(".input-ai--assistant:last-child") as HTMLDivElement;
 			expect(assistantElement?.classList.contains("input-ai--assistant-error")).toBeTruthy();
 			expect(assistantElement?.textContent).toEqual("- API Error: Rate limit exceeded");
+		});
+
+		test("should handle when response body is not readable", async () => {
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: true,
+				body: null,
+			});
+
+			const aiButton = document.querySelector(".input-ai--primary-button") as HTMLButtonElement;
+			aiButton.click();
+
+			const promptInput = document.querySelector(".input-ai--user-input") as HTMLTextAreaElement;
+			promptInput.value = "test prompt";
+
+			const submitButton = document.querySelector(".input-ai--submit-prompt") as HTMLButtonElement;
+			submitButton.click();
+
+			await new Promise((resolve) => setTimeout(resolve, inputAi.options.api.debounceTime));
+
+			const assistantElement = document.querySelector(".input-ai--assistant:last-child") as HTMLDivElement;
+			expect(assistantElement?.classList.contains("input-ai--assistant-error")).toBeTruthy();
+			expect(assistantElement?.textContent).toEqual("- Response body is not readable");
 		});
 
 		test("should cancel API request when stop button is clicked", async () => {

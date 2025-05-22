@@ -52,7 +52,8 @@
     "release": "release-it",
     "dev-server": "bun run examples/default/server.ts",
     "default": "bun examples/default/index.html",
-    "gemini": "bun examples/gemini/index.html"
+    "gemini": "bun examples/gemini/index.html",
+    "openai": "bun examples/openai/index.html"
   },
   "keywords": [
     "input",

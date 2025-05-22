@@ -405,7 +405,7 @@ class InputAI {
 				try {
 					return await this.replaceVariables(responseExpression, jsonChunk);
 				} catch (error) {
-					throw new Error(`Unable to parse the chunk with given responseExpression: ${error}`);
+					throw new Error(`Unable to parse the chunk with given responseExpression: ${(error as Error).message}`);
 				}
 			});
 		}
@@ -413,12 +413,11 @@ class InputAI {
 		const errorExpression = this.options.api.errorExpression;
 		if (errorExpression) {
 			streamer.onErrorEvent(async (rawChunk) => {
-				const jsonChunk = JSON.parse(rawChunk);
-
 				try {
+					const jsonChunk = JSON.parse(rawChunk);
 					return await this.replaceVariables(errorExpression, jsonChunk);
 				} catch (error) {
-					throw new Error(`Unable to parse the chunk with given errorExpression: ${error}`);
+					throw new Error(`Unable to parse the chunk with given errorExpression: ${(error as Error).message}`);
 				}
 			});
 		}
@@ -548,6 +547,8 @@ class InputAI {
 				}
 
 				result = result.replace(match, evaluated);
+			} else {
+				result = result.replace(match, "");
 			}
 		}
 

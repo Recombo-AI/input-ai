@@ -59,22 +59,35 @@ export class HTMLStreamer {
 		return this;
 	}
 
-	private processSSE(rawChunk: string): SSEEvent {
-		const parsedEvent: SSEEvent = {
-			event: "message", // Default event type
-			data: "",
-		};
+	private processSSE(rawChunk: string): SSEEvent[] {
+		const eventLines = rawChunk.split("\n\n");
+		const events: SSEEvent[] = [];
 
-		const lines = rawChunk.split("\n");
-		for (const line of lines) {
-			if (line.startsWith("event:")) {
-				parsedEvent.event = line.substring(6).trim();
-			} else if (line.startsWith("data:")) {
-				parsedEvent.data = line.substring(5).trim();
+		for (const eventBlock of eventLines) {
+			if (!eventBlock.trim()) continue;
+
+			let event = "message"; // Default event type
+			let data = "";
+
+			const lines = eventBlock
+				.split("\n")
+				.map((l) => l.trim())
+				.filter(Boolean);
+
+			for (const line of lines) {
+				if (line.startsWith("event:")) {
+					event = line.substring(6).trim();
+				} else if (line.startsWith("data:")) {
+					data = line.substring(5).trim();
+				}
+			}
+
+			if (data) {
+				events.push({ event, data });
 			}
 		}
 
-		return parsedEvent;
+		return events;
 	}
 
 	async start() {
@@ -89,12 +102,15 @@ export class HTMLStreamer {
 			}
 
 			if (rawChunk.startsWith("event:") || rawChunk.startsWith("data:")) {
-				const parsedSSE = this.processSSE(rawChunk);
-				if (parsedSSE.event === "error") {
-					await this.handleError(parsedSSE.data);
-				}
+				const events = this.processSSE(rawChunk);
 
-				await this.handleChunk(parsedSSE.data);
+				for (const event of events) {
+					if (event.event === "error") {
+						await this.handleError(event.data);
+					} else {
+						await this.handleChunk(event.data);
+					}
+				}
 			} else {
 				await this.handleChunk(rawChunk);
 			}

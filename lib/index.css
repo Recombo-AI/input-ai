@@ -110,7 +110,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: fit-content;
 }
 
 .input-ai--wrapper svg {
@@ -238,6 +237,10 @@
 	font-family: inherit;
 	background-color: var(--input-ai--user-input-bg);
 	color: var(--input-ai--user-input-color);
+}
+
+.input-ai--user-input::placeholder {
+	color: var(--input-ai--user-input-placeholder-color);
 }
 
 .input-ai--user-input-actions {

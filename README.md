@@ -373,6 +373,7 @@ Check out the `examples/` folder containing various examples
 
 * [Default](examples/default/index.html)
 * [Gemini + Tailwind](examples/gemini/index.html)
+* [OpenAI + Bootstrap](examples/openai/index.html)
 * more examples coming soon!
 
 ---

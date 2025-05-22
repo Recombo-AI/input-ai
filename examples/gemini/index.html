@@ -6,21 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Email Drafting Tool</title>
 
-  <link rel="stylesheet" href="./index.css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <link rel="stylesheet" href="./custom.css" />
+  <link rel="stylesheet" href="../../lib/index.css" />
   <script type="module" src="../../lib/index.ts"></script>
   <script type="module">
     document.addEventListener("DOMContentLoaded", function (event) {
       /*
         This example is just for demonstration purposes.
         DO NOT CALL LLM vendors directly from the client-side code.
-        Instead, use a server-side proxy to handle API requests securely as well as validating and sanitizing LLM instructions.
+        Instead, use a server-side proxy to handle API requests securely as well as validate and sanitize LLM instructions.
       */
       const apiKey = 'GOOGLE_API_KEY';
 
       configureInputAI({
         api: {
-          url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${apiKey}`,
+          url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:streamGenerateContent?alt=sse&key=${apiKey}`,
           body: {
             "system_instruction": {
               "parts": {
@@ -96,7 +98,7 @@
           class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           data-input-ai-modal-title="Email content generator"
           data-input-ai-prompt-placeholder="Ask AI to generate email content"
-          data-input-ai-system-instructions="You are expert in drafting emails.Draft an email body only in <pre> tag based on subject, email type, priority. <subject>{{subject.value}}</subject><emailType>{{emailType.value}}</emailType><priority>{{priority.value}}</priority>"></textarea>
+          data-input-ai-system-instructions="You are expert in drafting emails. Draft an email content (without subject) inside <pre> tag by considering given subject, email type, priority. <subject>{{subject.value}}</subject><emailType>{{emailType.value}}</emailType><priority>{{priority.value}}</priority>"></textarea>
       </div>
 
       <!-- Attachments -->

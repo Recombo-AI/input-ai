@@ -1,0 +1,28 @@
+/* Example of overriding InputAI styles with Bootstrap CSS variables */
+:root {
+  --input-ai--modal-content-bg: var(--bs-dark);
+  --input-ai--modal-header-border: 1px solid var(--bs-dark-border-subtle);
+  --input-ai--modal-title-color: var(--bs-white);
+  --input-ai--modal-close-icon-color: var(--bs-white);
+  --input-ai--modal-close-hover-bg: var(--bs-dark-border-subtle);
+
+  --input-ai--primary-button-bg: var(--bs-secondary);
+  --input-ai--primary-button-border-radius: var(--bs-border-radius);
+
+  --input-ai--action-button-bg: var(--bs-secondary);
+  --input-ai--action-button-border-radius: var(--bs-border-radius);
+
+  --input-ai--user-input-bg: var(--bs-dark);
+  --input-ai--user-input-color: var(--bs-white);
+  --input-ai--user-input-placeholder-color: var(--bs-gray);
+  --input-ai--user-input-form-border-top: 2px solid var(--bs-dark-border-subtle);
+
+  --input-ai--prompt-bg: var(--bs-secondary);
+  --input-ai--prompt-color: var(--bs-white);
+  --input-ai--assistant-bg: var(--bs-dark);
+  --input-ai--assistant-color: var(--bs-white);
+  --input-ai--response-container-bg: var(--bs-dark);
+  --input-ai--pre-tag-container-bg: var(--bs-black);
+  --input-ai--pre-tag-container-border: 1px solid var(--bs-dark-border-subtle);
+  --input-ai--pre-tag-color: var(--bs-white);
+}

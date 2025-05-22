@@ -157,12 +157,10 @@ function initAllInputAIElements(): void {
 	// Find all input and textarea elements that are not already initialized
 	// 1. Ignore elements that have the data-input-ai attribute
 	// 2. Include elements that have any data-input-ai-* attributes
-	const inputs: NodeListOf<InputAIElementType> = document.querySelectorAll(
-		'input[type="text"]:not([data-input-ai]), textarea:not([data-input-ai])',
-	);
+	const inputs: NodeListOf<InputAIElementType> = document.querySelectorAll("input, textarea");
 
 	const aiInputs: InputAIElementType[] = Array.from(inputs).filter((element: InputAIElementType) =>
-		Array.from(element.attributes).some((attr: Attr) => attr.name.startsWith("data-input-ai")),
+		Array.from(element.attributes).some((attr: Attr) => attr.name.startsWith("data-input-ai-")),
 	);
 
 	for (const aiInput of aiInputs) {

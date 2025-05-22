@@ -6,12 +6,14 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Start server using `bun run dev-server` on localhost:3001 first -->
+
+  <!-- InputAI configuration -->
   <meta name="input-ai-url" content="http://localhost:3001/stream">
   <meta name="input-ai-headers" content='{"X-CSRF-Token": "{{csrfmiddlewaretoken.value}}"}'>
   <meta name="input-ai-body"
     content='{"systemInstructions": "{{systemInstructions}}", "messages": "{{messages}}", "max_tokens": 100}'>
 
+  <link rel="stylesheet" href="../../lib/index.css">
   <script src="../../lib/index.ts"></script>
   <style>
     body {
@@ -107,9 +109,9 @@
       <label>
         Your Review:
         <textarea name="review1" placeholder="Add your review here..." data-input-ai-modal-title="AI Writer"
-          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"
           data-input-ai-prompt-placeholder="Ask AI to format your review"
-          data-input-ai-system-instructions="You are a product review expert. User has chosen product category as {{category.value}}. Provide very consise and short review of the product based on these points and wrap it in <pre> tag: <points>{{review1.value}}</points>"></textarea>
+          data-input-ai-system-instructions="You are a product review expert. User has chosen product category as {{category.value}}. Provide very consise and short review of the product based on these points and wrap it in <pre> tag: <points>{{review1.value}}</points>"
+          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"></textarea>
       </label>
     </div>
 
@@ -130,9 +132,9 @@
       <label>
         Your Review:
         <textarea name="review2" placeholder="Add your review here..." data-input-ai-modal-title="AI Writer"
-          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"
+          data-input-ai-prompt-placeholder="Ask AI to format your review"
           data-input-ai-system-instructions="You are a product review expert. User has chosen product usage frequency as {{usage.value}}. Provide very consise and short review of the product based on given points by user."
-          data-input-ai-prompt-placeholder="Ask AI to format your review"></textarea>
+          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"></textarea>
       </label>
     </div>
 
@@ -153,9 +155,9 @@
       <label>
         Your Review:
         <textarea name="review3" placeholder="Add your review here..." data-input-ai-modal-title="AI Writer"
-          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"
+          data-input-ai-prompt-placeholder="Ask AI to format your review"
           data-input-ai-system-instructions="You are a review expert. User has chosen product purchase reason as {{reason.value}}. Provide very consise and short review of the product based on given points by user."
-          data-input-ai-prompt-placeholder="Ask AI to format your review"></textarea>
+          data-input-ai-response-expression="{{$join(candidates.content.parts.text)}}"></textarea>
       </label>
     </div>
 
