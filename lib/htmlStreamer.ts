@@ -138,7 +138,7 @@ export class HTMLStreamer {
 		for (let i = 0; i < html.length; i++) {
 			const char = html[i];
 
-			if (char === "<") {
+			if (this.isTagStarting(char, html[i + 1])) {
 				this.flushBufferedText();
 
 				const closingTagPosition = html.indexOf(">", i + 1);
@@ -154,7 +154,7 @@ export class HTMLStreamer {
 					this.partialTagContent = html.slice(i + 1);
 					break;
 				}
-			} else if (char === ">" && this.partialTagContent !== null) {
+			} else if (this.isTagClosing(char, html[i - 1])) {
 				const tagContent = this.partialTagContent + this.textBuffer;
 				this.processTag(tagContent);
 
@@ -167,6 +167,16 @@ export class HTMLStreamer {
 				this.textBuffer += char;
 			}
 		}
+	}
+
+	private isTagStarting(char: string, nextChar: string | undefined) {
+		return (
+			char === "<" && (nextChar === undefined || nextChar === "/" || nextChar === "!" || /[a-zA-Z]/.test(nextChar))
+		);
+	}
+
+	private isTagClosing(char: string, prevChar: string | undefined) {
+		return char === ">" && this.partialTagContent !== null && (prevChar === undefined || /[a-zA-Z]/.test(prevChar));
 	}
 
 	private processTag(tagContent: string) {
@@ -204,10 +214,16 @@ export class HTMLStreamer {
 		}
 
 		if (!this.isProcessingBlockedTag && this.textBuffer) {
-			this.currentTag.appendChild(document.createTextNode(this.textBuffer));
+			this.currentTag.appendChild(document.createTextNode(this.decodeHTML(this.textBuffer)));
 		}
 
 		this.textBuffer = "";
+	}
+
+	private decodeHTML(html: string) {
+		const tempDiv = document.createElement("div");
+		tempDiv.innerHTML = html;
+		return tempDiv.textContent || "";
 	}
 
 	private get currentTag() {
