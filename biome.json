@@ -12,7 +12,8 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
-		"lineWidth": 120
+		"lineWidth": 120,
+		"ignore": ["node_modules", "dist"]
 	},
 	"organizeImports": {
 		"enabled": true
@@ -21,7 +22,8 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true
-		}
+		},
+		"ignore": ["node_modules", "dist"]
 	},
 	"javascript": {
 		"formatter": {

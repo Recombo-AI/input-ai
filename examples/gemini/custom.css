@@ -1,25 +1,25 @@
 /* Example of overriding InputAI styles with Tailwind CSS variables */
 :root {
-  --input-ai--modal-content-bg: var(--color-gray-800);
-  --input-ai--modal-header-border: 1px solid var(--color-gray-700);
-  --input-ai--modal-title-color: var(--color-gray-100);
+	--input-ai--modal-content-bg: var(--color-gray-800);
+	--input-ai--modal-header-border: 1px solid var(--color-gray-700);
+	--input-ai--modal-title-color: var(--color-gray-100);
 
-  --input-ai--primary-button-bg: var(--color-gray-800);
-  --input-ai--primary-button-border-radius: var(--radius-md);
+	--input-ai--primary-button-bg: var(--color-gray-800);
+	--input-ai--primary-button-border-radius: var(--radius-md);
 
-  --input-ai--action-button-bg: var(--color-gray-700);
-  --input-ai--action-button-border-radius: var(--radius-md);
+	--input-ai--action-button-bg: var(--color-gray-700);
+	--input-ai--action-button-border-radius: var(--radius-md);
 
-  --input-ai--user-input-bg: var(--color-gray-800);
-  --input-ai--user-input-color: var(--color-gray-100);
-  --input-ai--user-input-form-border-top: 2px solid var(--color-gray-700);
+	--input-ai--user-input-bg: var(--color-gray-800);
+	--input-ai--user-input-color: var(--color-gray-100);
+	--input-ai--user-input-form-border-top: 2px solid var(--color-gray-700);
 
-  --input-ai--prompt-bg: var(--color-blue-500);
-  --input-ai--prompt-color: var(--color-gray-100);
-  --input-ai--assistant-bg: var(--color-gray-800);
-  --input-ai--assistant-color: var(--color-gray-100);
-  --input-ai--response-container-bg: var(--color-gray-800);
-  --input-ai--pre-tag-container-bg: var(--color-gray-900);
-  --input-ai--pre-tag-container-border: 1px solid var(--color-gray-700);
-  --input-ai--pre-tag-color: var(--color-gray-100);
+	--input-ai--prompt-bg: var(--color-blue-500);
+	--input-ai--prompt-color: var(--color-gray-100);
+	--input-ai--assistant-bg: var(--color-gray-800);
+	--input-ai--assistant-color: var(--color-gray-100);
+	--input-ai--response-container-bg: var(--color-gray-800);
+	--input-ai--pre-tag-container-bg: var(--color-gray-900);
+	--input-ai--pre-tag-container-border: 1px solid var(--color-gray-700);
+	--input-ai--pre-tag-color: var(--color-gray-100);
 }

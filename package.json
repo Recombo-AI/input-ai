@@ -37,9 +37,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@happy-dom/global-registrator": "^17.4.4",
     "@release-it/conventional-changelog": "^10.0.1",
     "@types/bun": "latest",
+    "husky": "^9.1.7",
     "release-it": "^19.0.2"
   },
   "dependencies": {
@@ -53,7 +56,8 @@
     "dev-server": "bun run examples/default/server.ts",
     "default": "bun examples/default/index.html",
     "gemini": "bun examples/gemini/index.html",
-    "openai": "bun examples/openai/index.html"
+    "openai": "bun examples/openai/index.html",
+    "prepare": "bunx husky"
   },
   "keywords": [
     "input",

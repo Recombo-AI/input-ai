@@ -1,34 +1,31 @@
 {
-  "git": {
-    "requireBranch": "main",
-    "commitMessage": "chore: release v${version}",
-    "tagName": "v${version}",
-    "tagAnnotation": "Release v${version}"
-  },
-  "npm": {
-    "publish": true,
-    "publishPath": ".",
-    "tag": "latest",
-    "private": false,
-    "access": "public"
-  },
-  "github": {
-    "release": true,
-    "releaseName": "Release v${version}"
-  },
-  "hooks": {
-    "before:init": [
-      "bun lint",
-      "bun test"
-    ],
-    "after:bump": "bun run build",
-    "after:npm:release": "echo Successfully published ${name} v${version} to npm.",
-    "after:release": "echo Successfully released ${name} v${version}."
-  },
-  "plugins": {
-    "@release-it/conventional-changelog": {
-      "preset": "angular",
-      "infile": "CHANGELOG.md"
-    }
-  }
+	"git": {
+		"requireBranch": "main",
+		"commitMessage": "chore: release v${version}",
+		"tagName": "v${version}",
+		"tagAnnotation": "Release v${version}"
+	},
+	"npm": {
+		"publish": true,
+		"publishPath": ".",
+		"tag": "latest",
+		"private": false,
+		"access": "public"
+	},
+	"github": {
+		"release": true,
+		"releaseName": "Release v${version}"
+	},
+	"hooks": {
+		"before:init": ["bun lint", "bun test"],
+		"after:bump": "bun run build",
+		"after:npm:release": "echo Successfully published ${name} v${version} to npm.",
+		"after:release": "echo Successfully released ${name} v${version}."
+	},
+	"plugins": {
+		"@release-it/conventional-changelog": {
+			"preset": "angular",
+			"infile": "CHANGELOG.md"
+		}
+	}
 }
