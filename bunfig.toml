@@ -3,3 +3,4 @@ preload = "./happydom.ts"
 coverage = true
 coverageIgnoreSourcemaps = true
 coverageSkipTestFiles = true
+coverageReporter = "lcov"
