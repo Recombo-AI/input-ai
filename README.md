@@ -1,3 +1,7 @@
+<div align="center">
+
+# InputAI
+
 > Simple, framework-agnostic, HTML first JavaScript library for adding AI-powered text generation to input fields.
 
 <a href="https://www.npmjs.com/package/input-ai" target="_blank">
@@ -8,9 +12,9 @@
   <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/input-ai">
 </a>
 
-<a href="https://github.com/Recombo-AI/input-ai/blob/main/LICENSE">
-  <img alt="MIT License" src="https://img.shields.io/github/license/recombo-ai/input-ai">
-</a>
+</div>
+
+## Overview
 
 InputAI seamlessly integrates AI capabilities into your inputs with an elegant user interface that works with any LLM. Built with vanilla JavaScript, it provides a simple solution for enhancing your forms with AI assistance.
 
