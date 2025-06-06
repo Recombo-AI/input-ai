@@ -74,7 +74,7 @@ const globalOptions: InputAIOptions = {};
  *   api: {
  *     url: "https://api.example.com",
  *     headers: {
- *       "X-CSRF-Token": "{{csrftoken.value}}",
+ *       "X-CSRFToken": "{{csrftoken.value}}",
  *     },
  *     body: {
  *       messages: "{{messages}}",

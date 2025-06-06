@@ -6,7 +6,7 @@ const server = Bun.serve({
 		const corsHeaders = {
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-			"Access-Control-Allow-Headers": "Content-Type, X-CSRF-Token",
+			"Access-Control-Allow-Headers": "Content-Type, X-CSRFToken",
 		};
 
 		// Handle CORS preflight requests

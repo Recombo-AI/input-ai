@@ -643,7 +643,6 @@ class InputAI {
 		}
 	}
 
-
 	private shouldPrependText() {
 		return this.isInputTextarea() && this.inputElement.value.length > 0;
 	}
