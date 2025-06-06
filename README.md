@@ -250,6 +250,8 @@ Refer to the [API Reference](#api-reference) for all available meta tags.
 
 | Attribute                           | Description                                             |
 | ----------------------------------- | ------------------------------------------------------- |
+| `data-input-ai-modal-title`         | Title for the AI modal dialog                           |
+| `data-input-ai-prompt-placeholder`  | Placeholder text for the AI prompt input                |
 | `data-input-ai-url`                 | API endpoint URL                                        |
 | `data-input-ai-headers`             | JSON string of HTTP headers                             |
 | `data-input-ai-body`                | JSON string for the request body (e.g., model)          |
