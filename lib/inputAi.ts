@@ -469,20 +469,19 @@ class InputAI {
 		e.preventDefault();
 
 		const outputValue = preTag.textContent?.trim() || "";
-		this.inputElement.focus();
 
 		if (this.shouldPrependText()) {
-			const prependText = `${this.inputElement.value}\n\n${"-".repeat(50)}\n\n`;
+			const prependText = `${this.inputElement.value}\n`;
 			this.inputElement.value = `${prependText}${outputValue}`;
+			this.inputElement.setSelectionRange(prependText.length, prependText.length + outputValue.length);
 		} else {
 			this.inputElement.value = outputValue;
 		}
 
 		this.closeModal();
-	}
 
-	private shouldPrependText() {
-		return this.inputElement.tagName === "TEXTAREA" && this.inputElement.value.length > 0;
+		this.inputElement.focus();
+		this.scrollToBottom();
 	}
 
 	private copyToClipboard(e: Event, preTag: HTMLElement) {
@@ -642,6 +641,20 @@ class InputAI {
 				contextValue.label = field.labels?.[0]?.textContent || "";
 			}
 		}
+	}
+
+
+	private shouldPrependText() {
+		return this.isInputTextarea() && this.inputElement.value.length > 0;
+	}
+
+	private scrollToBottom() {
+		if (!this.isInputTextarea()) return;
+		this.inputElement.scrollTop = this.inputElement.scrollHeight;
+	}
+
+	private isInputTextarea() {
+		return this.inputElement.tagName === "TEXTAREA";
 	}
 
 	private debounce<T extends (...args: unknown[]) => unknown>(fn: T, delay: number) {
